@@ -13,17 +13,22 @@ import           Control.Monad       hiding (fmap)
 import           Data.Map            as Map
 import           Data.Text           (Text)
 import           Data.Void           (Void)
+import           Ledger              hiding (singleton)
+import           Ledger.Ada          as Ada (lovelaceValueOf)
+import           Ledger.Constraints  as Constraints (TxConstraints,
+                                                     mustPayToOtherScript,
+                                                     mustSpendScriptOutput,
+                                                     otherScript,
+                                                     unspentOutputs)
+import qualified Ledger.Scripts      as Scripts
+import           Playground.Contract (ensureKnownCurrencies, printJson,
+                                      printSchemas, stage)
+import           Playground.TH       (mkKnownCurrencies, mkSchemaDefinitions)
+import           Playground.Types    (KnownCurrency (..))
 import           Plutus.Contract     hiding (when)
 import           PlutusTx            (Data (..))
 import qualified PlutusTx
-import           PlutusTx.Prelude    hiding (Semigroup(..), unless)
-import           Ledger              hiding (singleton)
-import           Ledger.Constraints  as Constraints
-import qualified Ledger.Scripts      as Scripts
-import           Ledger.Ada          as Ada
-import           Playground.Contract (printJson, printSchemas, ensureKnownCurrencies, stage)
-import           Playground.TH       (mkKnownCurrencies, mkSchemaDefinitions)
-import           Playground.Types    (KnownCurrency (..))
+import           PlutusTx.Prelude    hiding (Semigroup (..), unless)
 import           Prelude             (Semigroup (..))
 import           Text.Printf         (printf)
 
